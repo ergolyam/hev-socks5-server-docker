@@ -25,4 +25,6 @@ COPY ./entrypoint.sh /app/entrypoint.sh
 
 RUN chmod +x /app/entrypoint.sh
 
+STOPSIGNAL SIGINT
+
 ENTRYPOINT [ "/app/entrypoint.sh" ]
