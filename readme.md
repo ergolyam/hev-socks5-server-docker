@@ -2,10 +2,18 @@
 
 Lightweight container image for [hev-socks5-server](https://github.com/heiher/hev-socks5-server).
 
-## Build
+## Initial Setup
+
+### Build
 
 ```bash
 docker build -t hev-socks5-server .
+```
+
+### Pull
+
+```bash
+docker pull ghcr.io/ergolyam/hev-socks5-server-docker:latest
 ```
 
 ## Run
