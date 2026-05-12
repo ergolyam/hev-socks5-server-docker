@@ -65,3 +65,5 @@ Authentication is disabled by default.
 | `PROXY_USER` | - | SOCKS5 username |
 | `PROXY_PASSWORD` | - | SOCKS5 password |
 | `AUTH_FILE` | `/data/auth.conf` | Auth file path |
+| `LOG_LEVEL` | `warn` | Log level: `debug`, `info`, `warn`, or `error` |
+| `LOG_FILE` | `stderr` | Log output: `stderr` or `stdout` |

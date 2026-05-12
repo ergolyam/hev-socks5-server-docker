@@ -8,6 +8,8 @@ RUNTIME_CONF=/tmp/hev-socks5-server.yml
 : "${LISTEN_ADDRESS:=::}"
 : "${WORKERS:=4}"
 : "${AUTH_FILE:=/data/auth.conf}"
+: "${LOG_LEVEL:=warn}"
+: "${LOG_FILE:=stderr}"
 
 die() {
     echo "entrypoint: $*" >&2
@@ -57,6 +59,22 @@ is_uint "$PORT" || die "PORT must be a number"
 is_uint "$WORKERS" || die "WORKERS must be a number"
 [ "$WORKERS" -ge 1 ] || die "WORKERS must be greater than zero"
 
+case "$LOG_LEVEL" in
+    debug|info|warn|error)
+        ;;
+    *)
+        die "LOG_LEVEL must be one of: debug, info, warn, error"
+        ;;
+esac
+
+case "$LOG_FILE" in
+    stdout|stderr)
+        ;;
+    *)
+        die "LOG_FILE must be stdout or stderr"
+        ;;
+esac
+
 AUTH_MODE=none
 
 if is_true "${AUTH_ENABLED:-}"; then
@@ -88,6 +106,10 @@ main:
   bind-interface: ''
   domain-address-type: unspec
   mark: 0
+
+misc:
+  log-file: $(yaml_quote "$LOG_FILE")
+  log-level: $(yaml_quote "$LOG_LEVEL")
 EOF
 
     case "$AUTH_MODE" in
