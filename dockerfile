@@ -1,4 +1,4 @@
-ARG VERSION=2.13.0
+ARG VERSION=2.13.1
 
 FROM docker.io/alpine:3.23 AS builder
 
